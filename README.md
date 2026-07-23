@@ -1,3 +1,20 @@
+# StreetComplete + React Native
+
+This is an experimental fork of the official [StreetComplete](https://github.com/streetcomplete/StreetComplete) with the sole purpose of testing brownfield support for Expo and React Native in large native-first codebases. Its commits serve as a reference for anyone interested in integrating React Native into an existing Android app, especially those that don't want to refactor the whole project structure to accommodate React Native.
+
+This project uses Expo's brownfield isolated approach, consuming a prebuilt **fused AAR** (a single artifact bundling the brownfield library, all autolinked Expo/React Native modules, and the release JS bundle) from a remote Maven repository — no local React Native toolchain is required to build this fork.
+
+## Integration steps
+
+Check commits for detailed steps, full instructions can be found in the [expo-brownfield documentation](https://docs.expo.dev/brownfield/overview/). The fused AAR is built with `npx expo-brownfield build:android --fused` from the Expo app in [briones-agent/packages](https://github.com/briones-agent/packages) and published there as a static Maven repository.
+
+1. **Add the Maven repository**: In `settings.gradle.kts`, add `https://raw.githubusercontent.com/briones-agent/packages/main/maven` to `dependencyResolutionManagement.repositories`.
+2. **Add the dependency**: `implementation("dev.expo.brownfield:expobrownfield-fused-release:1.0.1")` in the app's `androidMain` source set (`app/build.gradle.kts`).
+3. **Add React Native view**: Subclass `dev.expo.brownfield.BrownfieldActivity` (shipped inside the AAR), call `showReactNativeFragment()`, register the activity in the manifest, and launch it from an "Expo" button in the main menu dialog.
+
+<details>
+<summary>StreetComplete</summary>
+
 ![StreetComplete](.github/images/feature_graphic.png)
 
 StreetComplete is an easy to use editor of OpenStreetMap data available for Android. It can be used without any OpenStreetMap-specific knowledge. It asks simple questions, with answers directly used to edit and improve OpenStreetMap data. The app is aimed at users who do not know anything about OSM tagging schemes but still want to contribute to OpenStreetMap.
@@ -73,3 +90,5 @@ Development on this app was also sponsored in <a href="https://prototypefund.de/
 
 <a href="https://osmfoundation.org/"><img src=".github/images/logo_osmf.png" alt="OpenStreetMap foundation" height="70"/></a><br/>
 In August 2020, the **OpenStreetMap foundation** funded the development of <a href="https://wiki.openstreetmap.org/wiki/Microgrants/Microgrants_2020/Proposal/Map_Maintenance_with_StreetComplete">Map Maintenance with StreetComplete</a> within the frame of the <a href="https://blog.openstreetmap.org/2020/07/01/osmf-microgrants-program-congratulations-to-selected-projects/">microgrants program</a>.<br/>
+
+</details>
