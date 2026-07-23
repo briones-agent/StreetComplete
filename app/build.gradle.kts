@@ -50,6 +50,10 @@ plugins {
 repositories {
     google()
     mavenCentral()
+    // Expo brownfield demo: fused Expo/React Native AAR, see https://github.com/briones-agent/packages
+    maven("https://raw.githubusercontent.com/briones-agent/packages/main/maven") {
+        content { includeGroup("dev.expo.brownfield") }
+    }
 }
 
 buildkonfig {
@@ -201,6 +205,10 @@ kotlin {
 
                 // Android stuff
                 implementation("com.google.android.material:material:1.14.0")
+                // Expo brownfield demo: single fused AAR bundling all Expo/React Native modules,
+                // built via `expo-brownfield build:android --fused`, served from
+                // https://github.com/briones-agent/packages
+                implementation("dev.expo.brownfield:expobrownfield-fused-release:1.0.1")
                 implementation("androidx.core:core-ktx:1.18.0")
                 implementation("androidx.appcompat:appcompat:1.7.1")
                 implementation("androidx.constraintlayout:constraintlayout:2.2.1")

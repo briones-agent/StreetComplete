@@ -45,6 +45,7 @@ fun MainMenuDialog(
     onClickProfile: () -> Unit,
     onClickSettings: () -> Unit,
     onClickAbout: () -> Unit,
+    onClickExpo: () -> Unit = {},
     onClickDownload: () -> Unit,
     onClickUpload: () -> Unit,
     onClickEnterTeamMode: () -> Unit,
@@ -86,6 +87,12 @@ fun MainMenuDialog(
                         onClick = { onDismissRequest(); onClickAbout() },
                         icon = { Icon(painterResource(Res.drawable.ic_info_outline_48), null) },
                         text = stringResource(Res.string.about_title, ApplicationConstants.NAME),
+                    )
+                    // Expo brownfield demo: opens the React Native screen from the fused AAR.
+                    BigMenuButton(
+                        onClick = { onDismissRequest(); onClickExpo() },
+                        icon = { Icon(painterResource(Res.drawable.ic_info_outline_48), null) },
+                        text = "Expo",
                     )
                 }
                 Divider()

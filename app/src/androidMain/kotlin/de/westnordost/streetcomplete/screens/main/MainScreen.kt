@@ -434,6 +434,7 @@ fun MainScreen(
             onClickProfile = { context.startActivity(Intent(context, UserActivity::class.java)) },
             onClickSettings = { context.startActivity(Intent(context, SettingsActivity::class.java)) },
             onClickAbout = { context.startActivity(Intent(context, AboutActivity::class.java)) },
+            onClickExpo = { context.startActivity(Intent(context, de.westnordost.streetcomplete.expo.ExpoActivity::class.java)) },
             onClickDownload = onClickDownload,
             onClickUpload = ::onClickUpload,
             onClickEnterTeamMode = { showTeamModeWizard = true },
